@@ -1,0 +1,38 @@
+esphome:
+  name: garage_door_sensor
+  platform: ESP32
+  board: nodemcu-32s
+
+wifi:
+  ssid: "Pound Town"
+  password: "carclockchair"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Garage Door Sensor"
+    password: "wsevDJtd8wxf"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "fjsoifnjsbfnvipf2342dwfv"
+
+ota:
+  password: "fjsoifnjsbfnvipf2342dwfv"
+
+binary_sensor:
+
+  - platform: status
+    name: "esp32_1 Status"
+
+  - platform: gpio
+    pin:
+      number: 14
+      mode: INPUT_PULLDOWN
+      inverted: True
+    name: "door"
+    device_class: door
