@@ -27,7 +27,7 @@ ota:
 binary_sensor:
 
   - platform: status
-    name: "esp32_1 Status"
+    name: "Garage Door Sensor Status"
 
   - platform: gpio
     pin:
@@ -35,4 +35,9 @@ binary_sensor:
       mode: INPUT_PULLDOWN
       inverted: True
     name: "door"
-    device_class: door
+    device_class: garage_door
+
+sensor:
+  - platform: wifi_signal
+    name: "Garage Door Sensor WiFi Status"
+    update_interval: 60s
