@@ -1,5 +1,5 @@
 esphome:
-  name: garage_door_sensor
+  name: garage_door_sensor_container
   platform: ESP32
   board: nodemcu-32s
 
@@ -9,7 +9,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Garage Door Sensor"
+    ssid: "Garage Door Sensor Container"
     password: "wsevDJtd8wxf"
 
 captive_portal:
@@ -19,25 +19,25 @@ logger:
 
 # Enable Home Assistant API
 api:
-  password: "fjsoifnjsbfnvipf2342dwfv"
+  password: "fjsoifnjsbfjjkol67766t68i8yh3w55nvipf2342dwfv"
 
 ota:
-  password: "fjsoifnjsbfnvipf2342dwfv"
+  password: "fjsoifnjsbfjjkol67766t68i8yh3w55nvipf2342dwfv"
 
 binary_sensor:
 
   - platform: status
-    name: "Garage Door Sensor Status"
+    name: "Garage Door Sensor Status Container"
 
   - platform: gpio
     pin:
       number: 14
       mode: INPUT_PULLDOWN
       inverted: True
-    name: "Garage Door Binary Sensor"
+    name: "Garage Door Binary Sensor Container"
     device_class: garage_door
 
 sensor:
   - platform: wifi_signal
-    name: "Garage Door Sensor WiFi Status"
+    name: "Garage Door Sensor Container WiFi Status"
     update_interval: 60s

@@ -1,5 +1,5 @@
 esphome:
-  name: garage_door_sensor
+  name: roller_door_sensor
   platform: ESP32
   board: nodemcu-32s
 
@@ -9,7 +9,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Garage Door Sensor"
+    ssid: "Roller Door Sensor"
     password: "wsevDJtd8wxf"
 
 captive_portal:
@@ -27,17 +27,17 @@ ota:
 binary_sensor:
 
   - platform: status
-    name: "Garage Door Sensor Status"
+    name: "Roller Door Sensor Status"
 
   - platform: gpio
     pin:
       number: 14
       mode: INPUT_PULLDOWN
       inverted: True
-    name: "Garage Door Binary Sensor"
+    name: "Roller Door Binary Sensor"
     device_class: garage_door
 
 sensor:
   - platform: wifi_signal
-    name: "Garage Door Sensor WiFi Status"
+    name: "Roller Door Sensor WiFi Status"
     update_interval: 60s
