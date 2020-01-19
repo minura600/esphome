@@ -1,0 +1,42 @@
+esphome:
+  name: circuit_tester
+  platform: ESP32
+  board: nodemcu-32s
+
+wifi:
+  ssid: "Pound Town"
+  password: "carclockchair"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Circuit Tester"
+    password: "wsevDJtd8wxf"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "fjsoifnjsbfnvipf2342dwfv"
+
+ota:
+  password: "fjsoifnjsbfnvipf2342dwfv"
+
+binary_sensor:
+
+  - platform: status
+    name: "circuit tester Status"
+
+  - platform: gpio
+    pin:
+      number: 14
+      mode: INPUT_PULLDOWN
+      #inverted: True
+    name: "Circuit Tester Binary Sensor"
+
+sensor:
+  - platform: wifi_signal
+    name: "Circuit Tester WiFi Status"
+    update_interval: 60s

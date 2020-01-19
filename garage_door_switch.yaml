@@ -1,0 +1,51 @@
+esphome:
+  name: garage_door_switch
+  platform: ESP32
+  board: nodemcu-32s
+
+wifi:
+  ssid: "Pound Town"
+  password: "carclockchair"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Garage Door Switch"
+    password: "wsevDJtd8wxf"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "H9KmQf9fcrEvb65g"
+
+ota:
+  password: "H9KmQf9fcrEvb65g"
+
+switch:
+  - platform: gpio
+    pin: 
+      number: 14
+      #mode: INPUT_PULLDOWN
+      inverted: yes
+    id: relay
+
+  - platform: template
+    name: "House Garage Door"
+    turn_on_action:
+    - switch.turn_on: relay
+    - delay: 500ms
+    - switch.turn_off: relay
+
+
+binary_sensor:
+
+  - platform: status
+    name: "Garage Door Switch Status"
+
+sensor:
+  - platform: wifi_signal
+    name: "Garage Door Switch WiFi Status"
+    update_interval: 60s
