@@ -1,0 +1,1 @@
+pipenv run esphome roller_door_sensor.yaml run --upload-port 10.0.0.210

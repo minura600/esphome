@@ -1,0 +1,59 @@
+esphome:
+  name: container_wifi_switch_2
+  platform: ESP8266
+  board: esp01_1m
+
+
+api:
+  password: "sdfksdfnjsdvr485784rj"
+
+ota:
+  password: "sdfksdfnjsdvr485784rj"
+
+logger:
+
+wifi:
+  #ssid: "Container Wifi"
+  #password: "ballpenseathead"
+  ssid: "Container Wifi"
+  password: "ballpenseathead"
+
+  ap:
+    ssid: "Container Wifi Switch 2"
+    password: "wsevDJtd8wxf"
+
+captive_portal:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Container Wifi Switch 2 Bnary Sensor"
+    on_press:
+      - switch.toggle: relay
+    filters:
+      # Small filter, to debounce the button press.
+      - delayed_on: 25ms
+      - delayed_off: 25ms
+
+
+switch:
+  - platform: gpio
+    name: "Container Wifi Switch 2"
+    pin: GPIO12
+    id: relay
+
+output:
+  # Register the blue LED as a dimmable output ....
+  - platform: esp8266_pwm
+    id: blue_led
+    pin: GPIO13
+    inverted: True
+
+light:
+  # ... and then make a light out of it.
+  - platform: monochromatic
+    name: "Container Wifi Switch 2 LED"
+    output: blue_led
