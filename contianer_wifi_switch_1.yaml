@@ -13,7 +13,7 @@ ota:
 logger:
 
 wifi:
-  ssid: "Container Wifi"
+  ssid: "Container WiFi"
   password: "ballpenseathead"
 
   ap:

@@ -1,11 +1,11 @@
 esphome:
-  name: smart_doorbell
+  name: multi_sensor
   platform: ESP32
   board: nodemcu-32s
 
 wifi:
-  ssid: "Pound Town"
-  password: "carclockchair"
+  ssid: "Container WiFi"
+  password: "ballpenseathead"
 
   #manual_ip:
     # Set this to the IP of the ESP
@@ -17,7 +17,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Smart Doorbell"
+    ssid: "Multi Sensor"
     password: "wsevDJtd8wxf"
 
 captive_portal:
@@ -38,7 +38,7 @@ time:
 
 sensor:
   - platform: wifi_signal
-    name: "Smart Doorbell WiFi Status"
+    name: "Multi Sensor WiFi Status"
     update_interval: 60s
 
 # Global to store the on/off state of the chime
@@ -61,6 +61,19 @@ switch:
     name: Doorbell Chime
     pin: 18
 
+  # Switch to open the outer gate.
+  - platform: gpio
+    inverted: true
+    #name: Outer Garage Gate Switch
+    pin: 22
+    id: relay2
+
+  - platform: template
+    name: "Outer Garage Door Switch"
+    turn_on_action:
+    - switch.turn_on: relay2
+    - delay: 500ms
+    - switch.turn_off: relay2
   # Switch to turn on/off chime when
   # doorbell button is pushed.
   #
@@ -108,4 +121,21 @@ binary_sensor:
       - switch.turn_off: relay
 
   - platform: status
-    name: "Smart Doorbell Status"
+    name: "Multisensor Status"
+
+  - platform: gpio
+    pin:
+      number: 16
+      mode: INPUT_PULLUP
+      #inverted: True
+    name: "Inner Garage Door Binary Sensor"
+    device_class: garage_door
+
+  - platform: gpio
+    pin:
+      number: 21
+      mode: INPUT_PULLUP
+      #inverted: True
+    name: "Outer Garage Door Binary Sensor"
+    device_class: garage_door
+
