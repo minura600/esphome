@@ -41,3 +41,7 @@ sensor:
   - platform: wifi_signal
     name: "Roller Door Sensor WiFi Status"
     update_interval: 60s
+
+esp32_ble_beacon:
+  type: iBeacon
+  uuid: '89522fcf-f295-736f-facf-2a3eba7973e8'

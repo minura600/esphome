@@ -1,0 +1,8 @@
+esphome:
+  name: room_presence_theatre
+  platform: ESP32
+  board: nodemcu-32s
+
+esp32_ble_beacon:
+  type: iBeacon
+  uuid: 'b49f2b7b-b56c-dcdf-a865-891343dcf0d3'

@@ -1,0 +1,8 @@
+esphome:
+  name: room_presence_pantry
+  platform: ESP32
+  board: nodemcu-32s
+
+esp32_ble_beacon:
+  type: iBeacon
+  uuid: '70eb3ceb-ff32-95f9-3017-0f4291488782'

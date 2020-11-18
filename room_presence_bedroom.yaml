@@ -1,0 +1,8 @@
+esphome:
+  name: room_presence_bedroom
+  platform: ESP32
+  board: mhetesp32devkit
+
+esp32_ble_beacon:
+  type: iBeacon
+  uuid: '8f0b7f6b-0daa-c348-41b8-702642bb7c3c'
