@@ -1,1 +1,2 @@
 pipenv run esphome roller_door_sensor.yaml run --upload-port 10.0.0.210
+esphome run roller_door_sensor.yaml --device 10.0.0.22

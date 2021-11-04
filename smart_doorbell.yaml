@@ -7,13 +7,13 @@ wifi:
   ssid: "Pound Town"
   password: "carclockchair"
 
-  #manual_ip:
+  manual_ip:
     # Set this to the IP of the ESP
-    #static_ip: 10.0.0.19
+    static_ip: 10.0.0.19
     # Set this to the IP address of the router. Often ends with .1
-    #gateway: 10.0.0.1
+    gateway: 10.0.0.1
     # The subnet of the network. 255.255.255.0 works for most home networks.
-    #subnet: 255.255.255.0
+    subnet: 255.255.255.0
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
@@ -27,6 +27,8 @@ logger:
 
 api:
   password: "fjsoifnjsbfnvipf2342dwfv"
+  encryption:
+    key: zEBxsiPCPZLVG6xRrj3faYPUcDZatSNd+nrlnhFq+u8=
 
 ota:
   password: "fjsoifnjsbfnvipf2342dwfv"
@@ -80,6 +82,18 @@ switch:
           value: 'false'
     lambda: |-
       return id(chime);
+
+  - platform: template
+    name: Doorbell Chime From Home Assistant
+    id: chime_ha
+    restore_state: false
+    turn_on_action:
+      - switch.turn_on: relay
+      - delay: 5s
+      - switch.turn_off: relay
+      - switch.turn_off: chime_ha
+
+
 # Binary sensor representing the
 # Doorbell button push.
 binary_sensor:
@@ -101,11 +115,15 @@ binary_sensor:
         if:
           condition:
             - switch.is_on: chime_active
+            - switch.is_off: relay
           then:
             - switch.turn_on: relay
-    on_release:
+            - delay: 4s
+            - switch.turn_off: relay
+
+    #on_release:
       # On release, turn of the chime.
-      - switch.turn_off: relay
+      #- switch.turn_off: relay
 
   - platform: status
     name: "Smart Doorbell Status"

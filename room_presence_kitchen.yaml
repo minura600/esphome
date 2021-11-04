@@ -1,0 +1,8 @@
+esphome:
+  name: room_presence_kitchen
+  platform: ESP32
+  board: nodemcu-32s
+
+esp32_ble_beacon:
+  type: iBeacon
+  uuid: '36fe5450-cebe-b371-23b7-c2f7aaa65220'

@@ -1,0 +1,8 @@
+esphome:
+  name: room_presence_upstairs_corridor
+  platform: ESP32
+  board: nodemcu-32s
+
+esp32_ble_beacon:
+  type: iBeacon
+  uuid: '81924bcf-dec1-d651-1f5a-136655256655'
