@@ -1,5 +1,5 @@
 esphome:
-  name: garage_door_switch
+  name: garage-door-switch
   platform: ESP32
   board: nodemcu-32s
 
@@ -60,6 +60,6 @@ sensor:
     name: "Garage Door Switch WiFi Status"
     update_interval: 60s
 
-esp32_ble_beacon:
-  type: iBeacon
-  uuid: '28321548-c938-748c-67a3-1155b4ca98aa'
+#esp32_ble_beacon:
+  #type: iBeacon
+  #uuid: '28321548-c938-748c-67a3-1155b4ca98aa'

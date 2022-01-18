@@ -1,5 +1,5 @@
 esphome:
-  name: roller_door_sensor
+  name: roller-door-sensor
   platform: ESP32
   board: nodemcu-32s
 
