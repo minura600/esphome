@@ -1,1 +1,2 @@
 pipenv run esphome run roller-door-sensor.yaml --device 10.0.0.22
+pipenv run esphome run smart_doorbell.yaml --device 10.0.0.19

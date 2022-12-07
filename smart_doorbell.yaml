@@ -147,3 +147,17 @@ binary_sensor:
 
   - platform: status
     name: "Smart Doorbell Status"
+
+interval:
+  - interval: 30s
+    then:
+      - if:
+          condition:
+            - switch.is_on: relay
+          then:
+            - delay: 10s
+            - if:
+                condition: 
+                  - switch.is_on: relay
+                then:
+                  - switch.turn_off: relay
