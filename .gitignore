@@ -9,3 +9,4 @@
 **/platformio.ini
 /secrets.yaml
 roller-door-sensor/partitions.csv
+/.venv

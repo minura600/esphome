@@ -1,0 +1,69 @@
+esphome:
+  name: esp32-cam
+  platform: ESP32
+  board: esp32dev
+
+wifi:
+  ssid: "Pound Town"
+  password: "carclockchair"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "ESP32_Cam"
+    password: "wsevDJtd8wxf"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "fjsoifn82y49h9wdj9jdv"
+
+ota:
+  password: "fjsoifn82y49h9wdj9jdv"
+
+# Example configuration entry
+esp32_camera:
+  external_clock:
+    pin: GPIO0
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+  power_down_pin: GPIO32
+  resolution: 640x480
+  jpeg_quality: 10
+  max_framerate: 5 fps
+
+  # Image settings
+  name: My ESP32-CAM 
+
+# Flashlight
+output:
+  - platform: gpio
+    pin: GPIO4
+    id: gpio_4
+
+## GPIO_4 is the flash light pin
+light:
+  - platform: binary
+    output: gpio_4
+    name: flashlight
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/MichaKersloot/esphome_custom_components
+    components: [ esp32_camera ]
+
+esp32_camera_web_server:
+  - port: 8080
+    mode: stream
+  - port: 8081
+    mode: snapshot
