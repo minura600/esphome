@@ -1,0 +1,87 @@
+esphome:
+  name: xiaomi-scale
+  platform: ESP32
+  board: nodemcu-32s
+
+wifi:
+  ssid: "Pound Town"
+  password: "carclockchair"
+
+  manual_ip:
+    # Set this to the IP of the ESP
+    static_ip: 10.0.0.33
+    # Set this to the IP address of the router. Often ends with .1
+    gateway: 10.0.0.1
+    # The subnet of the network. 255.255.255.0 works for most home networks.
+    subnet: 255.255.255.0
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Xiaomi Scale"
+    password: "wsevDJtd8wxf"
+
+#captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: s4WTkK5j+lzP0dmJ/O9l8CjyGKqNZUmcip52TeDIUSc=
+
+ota:
+  password: "fouhe0wnfduu638sD"
+
+binary_sensor:
+  - platform: status
+    name: "Xiaomi Scale Status"
+
+
+sensor:
+  - platform: wifi_signal
+    name: "Xiaomi Scale WiFi Status"
+    update_interval: 60s
+
+# Xiaomi scale
+  - platform: xiaomi_miscale
+    mac_address: '38:1E:C7:82:C6:11'
+    weight:
+      name: "Xiaomi Mi Scale Weight"
+      id: weight_miscale
+      on_value:
+        then:
+          - lambda: |-
+              if (id(weight_miscale).state >= 80 && id(weight_miscale).state <= 105) {
+                return id(weight_user1).publish_state(x);}
+
+    impedance:
+      name: "Xiaomi Mi Scale Impedance"
+      id: impedance_miscale
+      on_value:
+        then:
+          - lambda: |-
+              if (id(weight_miscale).state >= 80 && id(weight_miscale).state <= 105) {
+                return id(impedance_user1).publish_state(x);}
+
+
+
+  - platform: template
+    name: Minura Weight
+    id: weight_user1
+    unit_of_measurement: 'kg'
+    icon: mdi:weight-kilogram
+    accuracy_decimals: 2
+  - platform: template
+    name: Minura Impedance
+    id: impedance_user1
+    unit_of_measurement: 'Ω'
+    icon: mdi:omega
+    accuracy_decimals: 0
+
+esp32_ble_tracker:
+
+
+#esp32_ble_beacon:
+  #type: iBeacon
+  #uuid: '28321548-c938-748c-67a3-1155b4ca98aa'

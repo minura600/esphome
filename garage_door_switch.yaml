@@ -20,14 +20,13 @@ wifi:
     ssid: "Garage Door Switch"
     password: "wsevDJtd8wxf"
 
-captive_portal:
+#captive_portal:
 
 # Enable logging
 logger:
 
 # Enable Home Assistant API
 api:
-  password: "H9KmQf9fcrEvb65g"
   encryption:
     key: 2PDoDPOiREN/2Vk7BGsYSKTVLusZGPOr6gtLishXNy0=
 

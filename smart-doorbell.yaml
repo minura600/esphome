@@ -40,13 +40,12 @@ wifi:
     ssid: "Smart Doorbell"
     password: "wsevDJtd8wxf"
 
-captive_portal:
+#captive_portal:
 
 # Enable logging.
 logger:
 
 api:
-  password: "fjsoifnjsbfnvipf2342dwfv"
   encryption:
     key: zEBxsiPCPZLVG6xRrj3faYPUcDZatSNd+nrlnhFq+u8=
 
@@ -58,6 +57,11 @@ time:
   - platform: homeassistant
     id: homeassistant_time
 
+  - platform: sntp
+    on_time:
+      - cron: '00 0 2 * * *'
+        then:
+          - switch.toggle: restart_switch
 sensor:
   - platform: wifi_signal
     name: "Smart Doorbell WiFi Status"
@@ -74,6 +78,7 @@ globals:
 switch:
   # Switch to restart the doorbell.
   - platform: restart
+    id: restart_switch
     name: Doorbell Restart
 
   # Switch to turn on/off the chime.
@@ -91,7 +96,7 @@ switch:
   - platform: template
     name: Doorbell Chime Active
     id: chime_active
-    restore_state: false
+    restore_mode: RESTORE_DEFAULT_ON 
     turn_on_action:
       - globals.set:
           id: chime
@@ -106,7 +111,7 @@ switch:
   - platform: template
     name: Doorbell Chime From Home Assistant
     id: chime_ha
-    restore_state: false
+    restore_mode: ALWAYS_OFF
     turn_on_action:
       - switch.turn_on: relay
       - delay: 4s
@@ -161,3 +166,5 @@ interval:
                   - switch.is_on: relay
                 then:
                   - switch.turn_off: relay
+
+
