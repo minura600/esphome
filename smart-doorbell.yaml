@@ -143,7 +143,7 @@ binary_sensor:
             - switch.is_off: relay
           then:
             - switch.turn_on: relay
-            - delay: 4s
+            - delay: 2s
             - switch.turn_off: relay
 
     #on_release:
