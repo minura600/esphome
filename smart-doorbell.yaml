@@ -160,11 +160,15 @@ binary_sensor:
               - switch.turn_on: relay
               - delay: 2s
               - switch.turn_off: relay
-        # Activate chime if disconencted from HA
+        # Activate chime if disconnected from HA or xiaomi gateway is offline
         - if:
             condition:
-              not:
-                - api.connected:
+              or:
+                - text_sensor.state:
+                    id: xiaomi
+                    state: 'away'
+                - not:
+                  - api.connected:
             then:
               - switch.turn_on: relay
               - delay: 2s
@@ -175,6 +179,13 @@ binary_sensor:
 
   - platform: status
     name: "Smart Doorbell Status"
+
+text_sensor:
+  - platform: homeassistant
+    id: xiaomi
+    name: "Xiaomi Doorbell Status"
+    entity_id: device_tracker.xiaomi_miio_gateway
+
 
 interval:
   - interval: 30s
