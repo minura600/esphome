@@ -117,6 +117,19 @@ switch:
       - delay: 4s
       - switch.turn_off: relay
       - switch.turn_off: chime_ha
+    # turn_on_action:
+    #   if:
+    #     condition:
+    #       - switch.is_on: chime_active
+    #     then:
+    #       - switch.turn_on: relay
+    #       - delay: 4s
+    #       - switch.turn_off: relay
+    #       - switch.turn_off: chime_ha
+    #     else:
+    #       - logger.log: "HA chime off"
+    #       - switch.turn_off: chime_ha
+
 
 
 # Binary sensor representing the
@@ -135,17 +148,27 @@ binary_sensor:
       - delayed_on: 100ms
       - delayed_off: 100ms
     on_press:
-      # Only turn on the chime when it is active.
+      # Only turn on the chime when it is active and connected to HA
       then:
-        if:
-          condition:
-            - switch.is_on: chime_active
-            - switch.is_off: relay
-          then:
-            - switch.turn_on: relay
-            - delay: 2s
-            - switch.turn_off: relay
-
+        - if:
+            condition:
+              and:
+                - switch.is_on: chime_active
+                - switch.is_off: relay
+                - api.connected:
+            then:
+              - switch.turn_on: relay
+              - delay: 2s
+              - switch.turn_off: relay
+        # Activate chime if disconencted from HA
+        - if:
+            condition:
+              not:
+                - api.connected:
+            then:
+              - switch.turn_on: relay
+              - delay: 2s
+              - switch.turn_off: relay
     #on_release:
       # On release, turn of the chime.
       #- switch.turn_off: relay
